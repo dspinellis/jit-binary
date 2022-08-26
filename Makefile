@@ -23,12 +23,14 @@ CFLAGS=-O
 
 # Single C file
 bin/%: src/%.c
+	mkdir -p bin
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 # Makefile project named X.
 # Running make in directory X should result in an X/X binary
 bin/%: src/%.make
 	$(MAKE) -C "$<"
+	mkdir -p bin
 	cp "$</$(@F)" "$@"
 
 # Installation rules for the jit-binary project
